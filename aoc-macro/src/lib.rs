@@ -7,8 +7,7 @@ pub fn main(item: TokenStream) -> TokenStream {
     format!(r#"
     fn main() {{
         use aoc::AoCSolution;
-        {day} {{}}.run("{day}");
+        Day{day}::run({day});
     }}
     "#, day=day).parse().unwrap()
 }
-

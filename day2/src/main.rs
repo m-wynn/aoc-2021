@@ -1,7 +1,8 @@
 use std::str::FromStr;
 
-aoc::main!(Day2);
+aoc::main!(2);
 
+#[derive(Default)]
 pub struct Day2 {}
 
 pub enum Day2Data {
@@ -25,7 +26,9 @@ impl FromStr for Day2Data {
     }
 }
 
-impl aoc::AoCSolution<Vec<Day2Data>, isize> for Day2 {
+impl aoc::AoCSolution for Day2 {
+    type ConvertedType = Vec<Day2Data>;
+    type ReturnType = isize;
     fn convert(&self, input: &str) -> Vec<Day2Data> {
         input
             .lines()

@@ -1,28 +1,32 @@
 use itertools::Itertools;
 
-aoc::main!(Day1);
+aoc::main!(1);
 
+#[derive(Default)]
 pub struct Day1 {}
 
-impl aoc::AoCSolution<Vec<i32>, usize> for Day1 {
-    fn convert(&self, input: &str) -> Vec<i32> {
+impl aoc::AoCSolution for Day1 {
+    type ConvertedType = Vec<i32>;
+    type ReturnType = usize;
+
+    fn convert(&self, input: &str) -> Self::ConvertedType {
         input
             .lines()
             .map(|x| x.parse::<i32>().expect("Could not parse"))
             .collect()
     }
 
-    fn part1(&self, input: &Vec<i32>) -> usize {
+    fn part1(&self, input: &Self::ConvertedType) -> Self::ReturnType {
         input
-            .into_iter()
+            .iter()
             .tuple_windows()
             .filter(|(prev, cur)| cur > prev)
             .count()
     }
 
-    fn part2(&self, input: &Vec<i32>) -> usize {
+    fn part2(&self, input: &Self::ConvertedType) -> Self::ReturnType {
         input
-            .into_iter()
+            .iter()
             .tuple_windows()
             .map(|(a, b, c)| a + b + c)
             .tuple_windows()
