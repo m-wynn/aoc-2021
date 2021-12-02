@@ -5,6 +5,13 @@ version = 3
 [[package]]
 name = "aoc"
 version = "0.1.0"
+dependencies = [
+ "aoc-macro",
+]
+
+[[package]]
+name = "aoc-macro"
+version = "0.1.0"
 
 [[package]]
 name = "day1"

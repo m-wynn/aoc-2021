@@ -1,11 +1,10 @@
 use itertools::Itertools;
+
+aoc::main!(Day1);
+
 pub struct Day1 {}
 
 impl aoc::AoCSolution<Vec<i32>, usize> for Day1 {
-    fn day(&self) -> usize {
-        1
-    }
-
     fn convert(&self, input: &str) -> Vec<i32> {
         input
             .lines()
@@ -30,10 +29,4 @@ impl aoc::AoCSolution<Vec<i32>, usize> for Day1 {
             .filter(|(prev, cur)| cur > prev)
             .count()
     }
-}
-
-use aoc::AoCSolution;
-
-fn main() {
-    Day1 {}.run();
 }

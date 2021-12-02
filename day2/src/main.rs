@@ -1,5 +1,6 @@
-use aoc::AoCSolution;
 use std::str::FromStr;
+
+aoc::main!(Day2);
 
 pub struct Day2 {}
 
@@ -25,10 +26,6 @@ impl FromStr for Day2Data {
 }
 
 impl aoc::AoCSolution<Vec<Day2Data>, isize> for Day2 {
-    fn day(&self) -> usize {
-        2
-    }
-
     fn convert(&self, input: &str) -> Vec<Day2Data> {
         input
             .lines()
@@ -59,8 +56,4 @@ impl aoc::AoCSolution<Vec<Day2Data>, isize> for Day2 {
                 });
         horizontal * depth
     }
-}
-
-fn main() {
-    Day2 {}.run();
 }
