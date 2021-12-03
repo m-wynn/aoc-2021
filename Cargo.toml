@@ -4,4 +4,5 @@ members = [
   "aoc-macro",
   "day1",
   "day2",
+  "day3",
 ]
