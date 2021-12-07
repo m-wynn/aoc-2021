@@ -1,6 +1,6 @@
 aoc::main!(4);
 use prettytable::{color, format, Attr, Cell, Row, Table};
-use std::{thread, time, cmp::Ordering};
+use std::{cmp::Ordering, thread, time};
 
 #[derive(Default)]
 pub struct Day4 {}
@@ -107,16 +107,14 @@ impl Day4Input {
             self.numbers
                 .iter()
                 .enumerate()
-                .map(|(index, number)| {
-                    match index.cmp(&self.numbers_index) {
-                        Ordering::Greater => Cell::new(&format!("{}", number)),
-                        Ordering::Less => Cell::new(&format!("{}", number)).with_style(Attr::Bold),
-                        Ordering::Equal => {
-                            current_number = *number;
-                            Cell::new(&format!("{}", number))
-                                .with_style(Attr::Bold)
-                                .with_style(Attr::ForegroundColor(color::RED))
-                        },
+                .map(|(index, number)| match index.cmp(&self.numbers_index) {
+                    Ordering::Greater => Cell::new(&format!("{}", number)),
+                    Ordering::Less => Cell::new(&format!("{}", number)).with_style(Attr::Bold),
+                    Ordering::Equal => {
+                        current_number = *number;
+                        Cell::new(&format!("{}", number))
+                            .with_style(Attr::Bold)
+                            .with_style(Attr::ForegroundColor(color::RED))
                     }
                 })
                 .collect(),

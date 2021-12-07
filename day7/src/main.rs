@@ -16,12 +16,7 @@ impl aoc::AoCSolution for Day7 {
 
     fn part1(&self, input: &Self::ConvertedType) -> Self::ReturnType {
         (0..2000)
-            .map(|test| {
-                input
-                    .iter()
-                    .map(|crab| (*crab as isize - test as isize).abs())
-                    .sum::<isize>()
-            })
+            .map(|test| input.iter().map(|crab| (*crab - test).abs()).sum())
             .min()
             .unwrap()
     }
@@ -31,9 +26,9 @@ impl aoc::AoCSolution for Day7 {
             .map(|test| {
                 input
                     .iter()
-                    .map(|crab| (*crab as isize - test as isize).abs())
+                    .map(|crab| (*crab - test).abs())
                     .map(|fuel| (fuel * (fuel + 1)) / 2)
-                    .sum::<isize>()
+                    .sum()
             })
             .min()
             .unwrap()

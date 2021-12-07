@@ -36,9 +36,9 @@ impl aoc::AoCSolution for Day6 {
     }
 
     fn part2(&self, input: &Self::ConvertedType) -> Self::ReturnType {
-        let mut fish_days = [0usize;9];
+        let mut fish_days = [0usize; 9];
         let input = input.clone();
-        input.iter().for_each(|d| { fish_days[d % 6] += 1 });
+        input.iter().for_each(|d| fish_days[d % 6] += 1);
 
         for _day in 0..=255 {
             let birthday_fish = fish_days[0];
@@ -49,6 +49,5 @@ impl aoc::AoCSolution for Day6 {
             fish_days[8] = birthday_fish;
         }
         fish_days.iter().sum()
-
     }
 }
