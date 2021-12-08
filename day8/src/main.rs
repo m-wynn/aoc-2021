@@ -47,80 +47,53 @@ impl aoc::AoCSolution for Day8 {
                     .map(|word| word.chars().collect::<HashSet<char>>());
                 numbers[1] = line_chain
                     .clone()
-                    .filter(|word| word.len() == 2)
-                    .next()
+                    .find(|word| word.len() == 2)
                     .unwrap();
                 numbers[7] = line_chain
                     .clone()
-                    .filter(|word| word.len() == 3)
-                    .next()
+                    .find(|word| word.len() == 3)
                     .unwrap();
                 numbers[4] = line_chain
                     .clone()
-                    .filter(|word| word.len() == 4)
-                    .next()
+                    .find(|word| word.len() == 4)
                     .unwrap();
                 numbers[3] = line_chain
                     .clone()
                     .filter(|word| word.len() == 5)
-                    .filter(|chars| chars.is_superset(&numbers[1]))
-                    .next()
+                    .find(|chars| chars.is_superset(&numbers[1]))
                     .unwrap();
                 numbers[9] = line_chain
                     .clone()
                     .filter(|word| word.len() == 6)
-                    .filter(|chars| chars.is_superset(&numbers[3]))
-                    .next()
+                    .find(|chars| chars.is_superset(&numbers[3]))
                     .unwrap();
                 numbers[8] = line_chain
                     .clone()
-                    .filter(|word| word.len() == 7)
-                    .next()
+                    .find(|word| word.len() == 7)
                     .unwrap();
                 let bottom_left = *(&numbers[8] - &numbers[9]).iter().next().unwrap();
                 numbers[2] = line_chain
                     .clone()
                     .filter(|word| word.len() == 5)
-                    .filter(|chars| chars.contains(&bottom_left))
-                    .next()
+                    .find(|chars| chars.contains(&bottom_left))
                     .unwrap();
                 numbers[5] = line_chain
                     .clone()
                     .filter(|word| word.len() == 5)
-                    .filter(|chars| chars != &numbers[2] && chars != &numbers[3])
-                    .next()
+                    .find(|chars| chars != &numbers[2] && chars != &numbers[3])
                     .unwrap();
                 numbers[6] = line_chain
                     .clone()
                     .filter(|word| word.len() == 6)
-                    .filter(|chars| chars != &numbers[9] && chars.is_superset(&numbers[5]))
-                    .next()
+                    .find(|chars| chars != &numbers[9] && chars.is_superset(&numbers[5]))
                     .unwrap();
                 numbers[0] = line_chain
                     .clone()
                     .filter(|word| word.len() == 6)
-                    .filter(|chars| chars != &numbers[9] && chars != &numbers[6])
-                    .next()
+                    .find(|chars| chars != &numbers[9] && chars != &numbers[6])
                     .unwrap();
 
-                let strrr = line
-                    .output
-                    .iter()
-                    .chain(line.output.iter())
-                    .map(|word| word.chars().collect::<HashSet<char>>())
-                    .map(|chars| {
-                        numbers
-                            .iter()
-                            .enumerate()
-                            .filter(|(_i, digits)| chars == **digits)
-                            .map(|(i, _digits)| i)
-                            .next()
-                            .expect("Could not find a matching digit")
-                    })
-                    .map(|c| c.to_string())
-                    .collect::<Vec<String>>();
-                dbg!(strrr);
-                let result = line
+                line
                     .output
                     .iter()
                     .map(|word| word.chars().collect::<HashSet<char>>())
@@ -128,16 +101,14 @@ impl aoc::AoCSolution for Day8 {
                         numbers
                             .iter()
                             .enumerate()
-                            .filter(|(_i, digits)| chars == **digits)
+                            .find(|(_i, digits)| chars == **digits)
                             .map(|(i, _digits)| i)
-                            .next()
                             .expect("Could not find a matching digit")
                     })
                     .rev()
                     .enumerate()
-                    .map(|(e, digit)| dbg!((digit as usize) * 10_usize.pow(e.try_into().unwrap())))
-                    .sum::<usize>();
-                dbg!(result)
+                    .map(|(e, digit)| ((digit as usize) * 10_usize.pow(e.try_into().unwrap())))
+                    .sum::<usize>()
             })
             .sum()
     }
